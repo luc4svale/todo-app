@@ -1,0 +1,64 @@
+.todo-input {
+  display: flex;
+  gap: 10px;
+  padding: 8px;
+  background: var(--surface-solid);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(20, 60, 80, 0.06);
+}
+
+.todo-input input,
+.todo-input select {
+  min-width: 0;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+}
+
+.todo-input input {
+  flex: 1;
+}
+
+.todo-input input:focus,
+.todo-input select:focus {
+  outline: none;
+  background: var(--item);
+}
+
+.todo-input select {
+  background: var(--item);
+  cursor: pointer;
+}
+
+.todo-input button {
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1bb3a5, var(--accent));
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(18, 153, 142, 0.3);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.todo-input button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(18, 153, 142, 0.38);
+}
+
+@media (max-width: 560px) {
+  .todo-input {
+    flex-wrap: wrap;
+  }
+
+  .todo-input input {
+    flex-basis: 100%;
+  }
+
+  .todo-input button {
+    flex: 1;
+  }
+}

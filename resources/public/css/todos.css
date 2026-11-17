@@ -1,0 +1,72 @@
+.todo-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--item);
+  border-radius: var(--radius);
+  transition: background-color 0.15s, transform 0.15s;
+}
+
+.todo-item:hover {
+  background: var(--item-hover);
+  transform: translateX(2px);
+}
+
+.todo-checkbox {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--mint);
+  cursor: pointer;
+}
+
+.todo-title {
+  flex: 1;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.completed {
+  background: var(--mint-soft);
+}
+
+.completed .todo-title {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: rgba(18, 153, 142, 0.6);
+}
+
+.delete-btn {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.delete-btn:hover {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.empty-state {
+  margin: 0;
+  padding: 40px 16px;
+  border: 2px dashed var(--line);
+  border-radius: 18px;
+  color: var(--muted);
+  text-align: center;
+}
