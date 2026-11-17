@@ -18,15 +18,24 @@
             :on-change #(swap! app-state assoc :input-text (.. % -target -value))}]
    [:button {:type "submit"} "Adicionar"]])
 
-(defn- todo-item [{:keys [id title completed]}]
+(defn- confirm-delete! [{:keys [id title]}]
+  (actions/ask-confirmation!
+   {:title "Excluir tarefa?"
+    :message (str "“" title "” será removida. Essa ação não pode ser desfeita.")
+    :confirm-label "Excluir"
+    :on-confirm #(actions/delete-todo! id)}))
+
+(defn- todo-item [{:keys [id title completed] :as todo}]
   [:li.todo-item {:class (when completed "completed")}
    [:input.todo-checkbox {:type "checkbox"
                           :checked (boolean completed)
+                          :aria-label (str "Concluir “" title "”")
                           :on-change #(actions/toggle-todo! id)}]
    [:span.todo-title title]
    [:button.delete-btn {:type "button"
-                        :on-click #(actions/delete-todo! id)}
-    "X"]])
+                        :aria-label (str "Excluir “" title "”")
+                        :on-click #(confirm-delete! todo)}
+    "✕"]])
 
 (defn- empty-message [{:keys [todos]}]
   (if (empty? todos)

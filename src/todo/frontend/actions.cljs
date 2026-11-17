@@ -37,3 +37,9 @@
 
 (defn set-status-filter! [status]
   (swap! app-state assoc :status-filter status))
+
+(defn ask-confirmation! [dialog]
+  (swap! app-state assoc :confirm dialog))
+
+(defn close-confirmation! [& _]
+  (swap! app-state assoc :confirm nil))

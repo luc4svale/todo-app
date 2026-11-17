@@ -5,6 +5,7 @@
   (r/atom {:todos []
            :input-text ""
            :status-filter :all
+           :confirm nil
            :error nil}))
 
 (def status-filters
