@@ -1,0 +1,225 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --bg: #e2eeef;
+  --surface: rgba(255, 255, 255, 0.86);
+  --surface-solid: #ffffff;
+  --item: #f4f8f9;
+  --item-hover: #eaf3f4;
+  --ink: #1f3b4d;
+  --muted: #6e8594;
+  --line: #dde9ec;
+  --accent: #12998e;
+  --accent-strong: #0d7c73;
+  --accent-soft: #dff3f0;
+  --pop: #f9845b;
+  --pop-strong: #e0653b;
+  --pop-soft: #fff0e9;
+  --mint: #12998e;
+  --mint-soft: #e3f4f1;
+  --danger: #e5484d;
+  --danger-strong: #c93a3f;
+  --danger-soft: #fdecee;
+  --radius: 14px;
+  --shadow: 0 2px 6px rgba(20, 60, 80, 0.06), 0 24px 60px rgba(20, 60, 80, 0.14);
+  --font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 64px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: var(--bg);
+  color: var(--ink);
+  font: 17px/1.55 var(--font);
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(18, 153, 142, 0.45);
+  outline-offset: 2px;
+}
+
+.todo-app {
+  width: 100%;
+  max-width: 760px;
+  padding: 40px;
+  display: grid;
+  gap: 24px;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.todo-app h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.error {
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  background: var(--danger-soft);
+  color: var(--danger-strong);
+  font-size: 15px;
+}
+
+.todo-input {
+  display: flex;
+  gap: 10px;
+  padding: 8px;
+  background: var(--surface-solid);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(20, 60, 80, 0.06);
+}
+
+.todo-input input,
+.todo-input select {
+  min-width: 0;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+}
+
+.todo-input input {
+  flex: 1;
+}
+
+.todo-input input:focus,
+.todo-input select:focus {
+  outline: none;
+  background: var(--item);
+}
+
+.todo-input select {
+  background: var(--item);
+  cursor: pointer;
+}
+
+.todo-input button {
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1bb3a5, var(--accent));
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(18, 153, 142, 0.3);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.todo-input button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(18, 153, 142, 0.38);
+}
+
+.todo-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--item);
+  border-radius: var(--radius);
+  transition: background-color 0.15s, transform 0.15s;
+}
+
+.todo-item:hover {
+  background: var(--item-hover);
+  transform: translateX(2px);
+}
+
+.todo-checkbox {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--mint);
+  cursor: pointer;
+}
+
+.todo-title {
+  flex: 1;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.completed {
+  background: var(--mint-soft);
+}
+
+.completed .todo-title {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: rgba(18, 153, 142, 0.6);
+}
+
+.delete-btn {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.delete-btn:hover {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+@media (max-width: 560px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  .todo-app {
+    padding: 24px 18px;
+    border-radius: 22px;
+  }
+
+  .todo-app h1 {
+    font-size: 28px;
+  }
+
+  .todo-input {
+    flex-wrap: wrap;
+  }
+
+  .todo-input input {
+    flex-basis: 100%;
+  }
+
+  .todo-input button {
+    flex: 1;
+  }
+}
