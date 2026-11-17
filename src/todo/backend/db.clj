@@ -1,17 +1,29 @@
-(ns todo.backend.db)
+(ns todo.backend.db
+  (:require [next.jdbc :as jdbc]))
 
-(def todos-db (atom {}))
+(def db-spec {:dbtype "sqlite"
+              :dbname "prod.db"})
 
-(def next-id (atom 0))
+(defn initialize-database! []
+  (jdbc/execute! db-spec ["
+    CREATE TABLE IF NOT EXISTS todos (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT,
+      description TEXT,
+      completed BOOLEAN DEFAULT 0,
+      created_at TEXT
+    )
+  "]))
 
 (defn get-all-todos []
-  (vec (vals @todos-db)))
+  (jdbc/execute! db-spec ["SELECT * FROM todos ORDER BY created_at DESC"]))
 
 (defn create-todo [todo-data]
-  (let [id (swap! next-id inc)
-        new-todo (assoc todo-data
-                        :id id
-                        :completed false
-                        :created-at (str (java.time.Instant/now)))]
-    (swap! todos-db assoc id new-todo)
-    new-todo))
+  (jdbc/execute-one! db-spec ["
+    INSERT INTO todos (title, description, completed, created_at)
+    VALUES (?, ?, ?, ?)
+    RETURNING *"
+    (:title todo-data)
+    (:description todo-data)
+    0
+    (str (java.time.Instant/now))]))
