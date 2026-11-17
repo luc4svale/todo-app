@@ -5,17 +5,20 @@
 
 (defn- submit! [e]
   (.preventDefault e)
-  (let [title (str/trim (:input-text @app-state))]
+  (let [input (.namedItem (.-elements (.-target e)) "title")
+        title (str/trim (.-value input))]
     (when-not (str/blank? title)
       (actions/create-todo! {:title title})
-      (swap! app-state assoc :input-text ""))))
+      (set! (.-value input) "")
+      (.focus input))))
 
 (defn todo-form []
   [:form.todo-input {:on-submit submit!}
-   [:input {:type "text"
+   [:input {:name "title"
+            :type "text"
             :placeholder "O que precisa ser feito?"
-            :value (:input-text @app-state)
-            :on-change #(swap! app-state assoc :input-text (.. % -target -value))}]
+            :auto-complete "off"
+            :aria-label "Nova tarefa"}]
    [:button {:type "submit"} "Adicionar"]])
 
 (defn- confirm-delete! [{:keys [id title]}]

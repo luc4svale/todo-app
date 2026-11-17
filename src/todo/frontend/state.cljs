@@ -3,7 +3,6 @@
 
 (defonce app-state
   (r/atom {:todos []
-           :input-text ""
            :status-filter :all
            :confirm nil
            :error nil}))
