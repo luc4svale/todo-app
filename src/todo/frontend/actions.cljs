@@ -34,3 +34,6 @@
   (call! #(api/delete-todo id)
          #(swap! app-state update :todos
                  (fn [todos] (filterv (fn [todo] (not= id (:id todo))) todos)))))
+
+(defn set-status-filter! [status]
+  (swap! app-state assoc :status-filter status))

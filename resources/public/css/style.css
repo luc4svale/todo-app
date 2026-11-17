@@ -223,3 +223,44 @@ select {
     flex: 1;
   }
 }
+
+.filters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px;
+  background: var(--item);
+  border-radius: var(--radius);
+}
+
+.chip {
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.chip:hover {
+  color: var(--ink);
+}
+
+.chip--active,
+.chip--active:hover {
+  background: var(--surface-solid);
+  color: var(--accent-strong);
+  box-shadow: 0 1px 4px rgba(20, 60, 80, 0.1);
+}
+
+.empty-state {
+  margin: 0;
+  padding: 40px 16px;
+  border: 2px dashed var(--line);
+  border-radius: 18px;
+  color: var(--muted);
+  text-align: center;
+}

@@ -1,7 +1,7 @@
 (ns todo.frontend.views.todos
   (:require [clojure.string :as str]
             [todo.frontend.actions :as actions]
-            [todo.frontend.state :refer [app-state]]))
+            [todo.frontend.state :as state :refer [app-state]]))
 
 (defn- submit! [e]
   (.preventDefault e)
@@ -28,8 +28,17 @@
                         :on-click #(actions/delete-todo! id)}
     "X"]])
 
+(defn- empty-message [{:keys [todos]}]
+  (if (empty? todos)
+    "Nenhuma tarefa ainda. Comece adicionando uma acima."
+    "Nenhuma tarefa neste filtro."))
+
 (defn todo-list []
-  [:ul.todo-list
-   (for [todo (:todos @app-state)]
-     ^{:key (:id todo)}
-     [todo-item todo])])
+  (let [current @app-state
+        todos (state/visible-todos current)]
+    (if (empty? todos)
+      [:p.empty-state (empty-message current)]
+      [:ul.todo-list
+       (for [todo todos]
+         ^{:key (:id todo)}
+         [todo-item todo])])))
